@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("Регистрация нового тикета")
 class MainPageTest extends BaseTest {
 
-    @Story("Задача на доработку ZOVO-001")
+    @Story("Задача на доработку ZOVO-003")
     @DisplayName("Создание тикета и проверка корректности зарегистрированных данных")
     @Description("Заполнение данных на формы обращения, регистрация и последующая корректности для каждого из отправленных полей")
     @ParameterizedTest(name = "[{index}] Регистрация с типом {0}")
