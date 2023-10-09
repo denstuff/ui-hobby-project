@@ -2,8 +2,10 @@ package com.qa.hobby.utils;
 
 import com.qa.hobby.exeption.AutotestError;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,17 +28,21 @@ public class FileUtils {
         return tempFile;
     }
 
-    public static void deleteFiles(String directoryPath) {
+    public static void deleteFiles(String directoryPath, String fileNamePrefix, String extension) {
 
         if (!Files.isDirectory(Paths.get(directoryPath))) {
             log.warn("Переданная директория '{}' не существует", directoryPath);
             return;
         }
+        FileFilter fileFilter = new WildcardFileFilter(
+                org.apache.commons.lang3.StringUtils.isBlank(fileNamePrefix) ? "*" : fileNamePrefix + "*"
+                        + (org.apache.commons.lang3.StringUtils.isBlank(extension) ? ".*" : extension));
+
 
         Set<String> successDeletedFiles = new HashSet<>();
         Set<String> errorDeleteFiles = new HashSet<>();
 
-        File[] dir = new File(directoryPath).listFiles();
+        File[] dir = new File(directoryPath).listFiles(fileFilter);
 
         for (File file : dir) {
             if (file.isFile()) {

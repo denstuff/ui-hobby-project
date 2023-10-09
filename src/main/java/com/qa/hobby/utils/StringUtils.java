@@ -12,9 +12,9 @@ public class StringUtils {
     }
 
     public static String getSubstringByRegex(String string, Pattern pattern, int group) {
-        Matcher ticketIdMatcher = pattern.matcher(string);
-        if (ticketIdMatcher.find())
-            return ticketIdMatcher.group(group);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.find())
+            return matcher.group(group);
         else return null;
     }
 }

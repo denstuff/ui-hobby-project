@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static com.qa.hobby.config.ConfigProvider.DOWNLOAD_DIRECTORY;
+import static com.qa.hobby.config.ConfigProvider.*;
 import static com.qa.hobby.utils.FileUtils.deleteFiles;
 
 @ExtendWith(TestListener.class)
@@ -29,7 +29,7 @@ public abstract class BaseTest {
     @AfterAll
     public static void tearDown() {
         DriverManager.quitDriver();
-        deleteFiles(DOWNLOAD_DIRECTORY);
+        deleteFiles(DOWNLOAD_DIRECTORY, FILE_NAME_PRIFIX, FILE_EXTENSION);
     }
 
 }
