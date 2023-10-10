@@ -18,8 +18,8 @@ public class TicketsPage extends BasePage {
         findElementBy(FindType.WEB_ELEMENT, searchQuery);
     }
 
-    @Step("Поиск тикета по заданным критериям: {0}")
-    public List<WebElement> searchTicket(String searchTicketData, String expectedTicketSummaryValue) {
+    @Step("Поиск тикетов по заданным критериям: {0}")
+    public List<WebElement> searchTickets(String searchTicketData, String expectedTicketSummaryValue) {
         searchQuery.sendKeys(searchTicketData, Keys.ENTER);
         return findElementsBy(FindType.XPATH
                 , String.format(ticketTitleLink, expectedTicketSummaryValue));

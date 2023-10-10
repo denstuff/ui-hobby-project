@@ -80,7 +80,7 @@ class MainPageTest extends BaseTest {
         TicketsPage ticketsPage = registeredTicketPage.goToLoginPage().doLogin();
 
         // Search our ticket
-        List<WebElement> foundedTickets = ticketsPage.searchTicket(summaryFieldIn, summaryFieldIn);
+        List<WebElement> foundedTickets = ticketsPage.searchTickets(summaryFieldIn, summaryFieldIn);
 
         // Check that one ticket has returned
         Assertions.assertEquals(1, foundedTickets.size()

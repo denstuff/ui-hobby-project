@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import static com.qa.hobby.config.ConfigProvider.DOWNLOAD_DIRECTORY;
@@ -16,6 +17,10 @@ import static com.qa.hobby.utils.CommonHelper.getWait;
 
 public abstract class BasePage {
     protected static WebDriver driver;
+    protected static Collection<Class<? extends Exception>> baseWebDriverExceptions = List.of(
+            NoSuchElementException.class,
+            ElementNotInteractableException.class,
+            StaleElementReferenceException.class);
 
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
@@ -42,11 +47,7 @@ public abstract class BasePage {
                     throw new AutotestError(String.format("Переданный тип поиска вэб-элемента = '%s' не определен либо не поддерживается!", findType));
         }
 
-        return getWait(driver
-                , List.of(NoSuchElementException.class
-                        , ElementNotInteractableException.class
-                        , StaleElementReferenceException.class))
-                .until(expectedCondition);
+        return getWait(driver, baseWebDriverExceptions).until(expectedCondition);
     }
 
     public <T> List<WebElement> findElementsBy(FindType findType, T findValue) {
@@ -66,11 +67,7 @@ public abstract class BasePage {
                     throw new AutotestError(String.format("Переданный тип поиска вэб-элементов = '%s' не определен либо не поддерживается!", findType));
         }
 
-        return getWait(driver
-                , List.of(NoSuchElementException.class
-                        , ElementNotInteractableException.class
-                        , StaleElementReferenceException.class))
-                .until(expectedCondition);
+        return getWait(driver, baseWebDriverExceptions).until(expectedCondition);
     }
 
     @Step("Переход в браузере на страницу: {0}")
