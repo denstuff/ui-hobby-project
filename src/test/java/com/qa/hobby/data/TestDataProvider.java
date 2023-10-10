@@ -10,13 +10,13 @@ import java.util.stream.Stream;
 import static com.qa.hobby.config.ConfigProvider.*;
 import static com.qa.hobby.utils.FileUtils.createTempFile;
 import static com.qa.hobby.utils.StringUtils.stringDataTimeModifier;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Slf4j
 public class TestDataProvider {
+    public static final String EMPTY_STRING = "";
 
     static Stream<Arguments> createTicketsData() {
-        String strModifier = stringDataTimeModifier(EMPTY);
+        String strModifier = stringDataTimeModifier(EMPTY_STRING);
         // removing the leading zero
         String dayOfMonth = String.valueOf(
                 Integer.parseInt(new SimpleDateFormat("dd").format(new Date())));

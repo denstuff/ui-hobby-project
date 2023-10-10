@@ -111,8 +111,11 @@ class MainPageTest extends BaseTest {
     }
 
 //    @Test
-//    public void Test1() {
-//        System.out.println("@@@ Test 1: " + (StringUtils.isBlank(this.str) ? "" : this.str));
+//    public void TestTest() {
+//        AllureHelper.stepStart("Starting a custom allure step.");
+//        BasePage.goToPage(ConfigProvider.BASE_URL);
+//        AllureHelper.addReportDataToAllure("Тестовая проверка работы Аллюра 1: {}", "Тест 1");
+//        AllureHelper.stepFinish();
 //    }
 
 }

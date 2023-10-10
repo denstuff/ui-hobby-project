@@ -1,6 +1,5 @@
 package com.qa.hobby.tests;
 
-import com.qa.hobby.config.ConfigProvider;
 import com.qa.hobby.driver.DriverManager;
 import com.qa.hobby.extensions.TestListener;
 import com.qa.hobby.pages.BasePage;
@@ -23,13 +22,15 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void cleanAndRestoreBrowserEnvironment() {
-        if (ConfigProvider.CLEAN_COOKIES) DriverManager.getDriver().manage().deleteAllCookies();
+        if (CLEAN_COOKIES)
+            DriverManager.getDriver().manage().deleteAllCookies();
     }
 
     @AfterAll
     public static void tearDown() {
         DriverManager.quitDriver();
-        deleteFiles(DOWNLOAD_DIRECTORY, FILE_NAME_PRIFIX, FILE_EXTENSION);
+        if (CLEAN_CONTEXT_FILES)
+            deleteFiles(DOWNLOAD_DIRECTORY, FILE_NAME_PRIFIX, FILE_EXTENSION);
     }
 
 }

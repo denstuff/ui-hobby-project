@@ -31,6 +31,7 @@ public abstract class ConfigProvider {
     public static final String FILE_NAME_PRIFIX = configure.getString("fileNamePrefix");
     public static final String FILE_EXTENSION = configure.getString("fileExtension");
     public static final String DOWNLOAD_DIRECTORY = System.getProperty("user.home") + "\\Downloads";
+    public static final Boolean CLEAN_CONTEXT_FILES = configure.getBoolean("cleanContextFiles");
 
     // Test data
     public static final String BASE_URL = configure.getString("baseUrl");
