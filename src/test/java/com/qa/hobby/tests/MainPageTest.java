@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 import com.qa.hobby.config.ConfigProvider;
 import com.qa.hobby.pages.*;
 import com.qa.hobby.utils.AllureHelper;
-import com.qa.hobby.utils.CommonHelper;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +13,6 @@ import org.junit.platform.commons.util.StringUtils;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 
 import static com.qa.hobby.config.ConfigProvider.TICKET_ID_PATTERN;
@@ -31,7 +29,7 @@ class MainPageTest extends BaseTest {
 
     @Story("Задача на доработку ZOVO-003")
     @DisplayName("Создание тикета и проверка корректности зарегистрированных данных")
-    @Description("Заполнение данных на формы обращения, регистрация и последующая корректности для каждого из отправленных полей")
+    @Description("Заполнение данных на форме обращения, регистрация тикета и последующая проверка корректности для каждого из отправленных полей")
     @ParameterizedTest(name = "[{index}] Регистрация с типом {0}")
     @MethodSource("com.qa.hobby.data.TestDataProvider#createTicketsData")
     public void createNewTicketAndVerifyIt(String queueSelectIn
@@ -40,7 +38,7 @@ class MainPageTest extends BaseTest {
             , String prioritySelectIn
             , String dayOfMonthIn
             , File attachmentFileIn
-            , String emailIn) {
+            , String emailIn) throws NoSuchFieldException, IllegalAccessException {
 
         BasePage.goToPage(ConfigProvider.BASE_URL);
 
@@ -57,7 +55,6 @@ class MainPageTest extends BaseTest {
 
         // Waiting for saving attachment file to local download directory
         File registeredTicketAttachment = registeredTicketPage.getAttachment();
-        CommonHelper.getWait(registeredTicketAttachment, Collections.emptyList()).until(File::exists);
 
         // Save registered ticket id in specific variable
         String registeredTicketId = getSubstringByRegex(registeredTicketPage.getCaption(), TICKET_ID_PATTERN, 1);
@@ -93,7 +90,6 @@ class MainPageTest extends BaseTest {
 
         // Wait for saving attachment file to local download directory
         File authorizedTicketAttachment = authorizedTicketPage.getAttachment();
-        CommonHelper.getWait(authorizedTicketAttachment, Collections.emptyList()).until(File::exists);
 
         // Verification all field ticket data in authorized page
         Assertions.assertAll(

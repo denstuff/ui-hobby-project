@@ -4,6 +4,7 @@ import com.qa.hobby.driver.DriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
@@ -49,7 +50,7 @@ public class AllureHelper {
     }
 
     public static String stepStart(String stepName) {
-        StepResult result = new StepResult().setName(stepName);
+        StepResult result = new StepResult().setName(stepName).setStatus(Status.PASSED);
         String uuid = UUID.randomUUID().toString();
         getLifecycle().startStep(uuid, result);
         STEP_UUID_STACK.get().addFirst(uuid);

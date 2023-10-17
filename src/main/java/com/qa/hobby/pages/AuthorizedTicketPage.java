@@ -50,7 +50,7 @@ public class AuthorizedTicketPage extends BasePage {
         return caption.getText();
     }
 
-    public File getAttachment() {
+    public File getAttachment(){
         return downloadAndGetAttachment(attachment);
     }
 
